@@ -1,0 +1,23 @@
+# https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
+# https://kubernetes-sigs.github.io/kustomize/api-reference/
+#
+# The secrets file should not be checked into Git.
+# It's published only for demonstration purpose.
+
+secretGenerator:
+  - name: mysql-root-pass
+    literals:
+      - password=quanpan302
+  - name: mysql-user-pass
+    literals:
+      - username=quanpan302
+      - password=quanpan302
+  - name: mysql-db-url
+    literals:
+      - database=cars
+      - url=jdbc:mysql://cars-db-mysql:3306/cars?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+
+resources:
+  - cars-db-mysql.yaml
+  - cars-server.yaml
+  - cars-client.yaml
